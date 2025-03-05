@@ -25,12 +25,14 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
+# env files (can opt-in for commiting if needed)
+.env*.local
+.env*
+!.env.example
+
 # macOS
 .DS_Store
 *.pem
-
-# local env files
-.env*.local
 
 # typescript
 *.tsbuildinfo
