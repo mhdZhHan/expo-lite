@@ -43,6 +43,8 @@ export default function Login() {
         <Image
           source={require("@/assets/images/auth-bg.png")}
           style={styles.illustration}
+          accessibilityLabel="auth bg"
+          alt="auth bg"
           resizeMode="cover"
         />
       </View>
