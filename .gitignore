@@ -27,8 +27,8 @@ yarn-error.*
 
 # env files (can opt-in for commiting if needed)
 .env*.local
-.env*
-!.env.example
+# .env*
+# !.env.example
 
 # macOS
 .DS_Store

@@ -1,43 +1,31 @@
 import { StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 
-import { tokenCache } from "@/cache";
-import { COLORS } from "@/constants";
-
+import Providers from "@/components/Providers";
 import AuthNavigation from "@/components/AuthNavigation";
 
+import { COLORS } from "@/constants";
+
 const RootLayout = () => {
-  const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-  if (!publishableKey) {
-    throw new Error("Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env");
-  }
-
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-        <ClerkLoaded>
-          <SafeAreaProvider>
-            <StatusBar
-              backgroundColor={COLORS.background}
-              barStyle={"light-content"}
-              animated
-            />
+    <Providers>
+      <SafeAreaProvider>
+        <StatusBar
+          backgroundColor={COLORS.background}
+          barStyle={"light-content"}
+          animated
+        />
 
-            <SafeAreaView
-              style={{
-                flex: 1,
-                backgroundColor: COLORS.background,
-              }}
-            >
-              <AuthNavigation />
-            </SafeAreaView>
-          </SafeAreaProvider>
-        </ClerkLoaded>
-      </ClerkProvider>
-    </GestureHandlerRootView>
+        <SafeAreaView
+          style={{
+            flex: 1,
+            backgroundColor: COLORS.background,
+          }}
+        >
+          <AuthNavigation />
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </Providers>
   );
 };
 
