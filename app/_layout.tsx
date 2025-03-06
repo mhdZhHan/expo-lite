@@ -1,3 +1,4 @@
+import { StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
@@ -19,6 +20,12 @@ const RootLayout = () => {
       <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
         <ClerkLoaded>
           <SafeAreaProvider>
+            <StatusBar
+              backgroundColor={COLORS.background}
+              barStyle={"light-content"}
+              animated
+            />
+
             <SafeAreaView
               style={{
                 flex: 1,
