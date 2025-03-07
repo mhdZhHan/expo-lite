@@ -47,7 +47,6 @@ http.route({
       });
     }
 
-    // Create headers object with correct typing
     const headers: SvixHeaders = {
       "svix-id": svixId,
       "svix-signature": svixSignature,
@@ -75,7 +74,6 @@ http.route({
       const { id, email_addresses, first_name, last_name, image_url } =
         evt.data;
 
-      // Validate email_address array
       if (!email_addresses?.length) {
         return new Response("No email address provided", {
           status: 400,
