@@ -18,7 +18,7 @@ export default defineSchema({
     userId: v.id("users"),
     storageId: v.id("_storage"), // will be needed when we want to delete a post
     imageUrl: v.string(),
-    caption: v.string(),
+    caption: v.optional(v.string()),
     likes: v.number(),
     comments: v.number(),
   }).index("by_user", ["userId"]),
