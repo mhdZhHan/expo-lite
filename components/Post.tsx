@@ -36,7 +36,10 @@ export default function Post({ post }: PostProps) {
   const [showComments, setShowComments] = useState(false);
   const [commentsCount, setCommentsCount] = useState(post.comments);
 
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
   const toggleLike = useMutation(api.posts.toggleLike);
+  const toggleBookmark = useMutation(api.bookmarks.toggleBookmark);
 
   const handleLike = () => {
     const wasLiked = isLiked;
@@ -49,6 +52,18 @@ export default function Post({ post }: PostProps) {
       console.error("Error liking post", error);
       setIsLiked(wasLiked);
       setLikesCount((prev) => (wasLiked ? prev + 1 : prev - 1));
+    });
+  };
+
+  const handleBookmark = () => {
+    const wasBookmarked = isBookmarked;
+    // Optimistically update UI
+    setIsBookmarked(!wasBookmarked);
+
+    // API call in background
+    toggleBookmark({ postId: post._id }).catch((error) => {
+      console.error("Error bookmarking post", error);
+      setIsBookmarked(wasBookmarked);
     });
   };
 
@@ -102,8 +117,12 @@ export default function Post({ post }: PostProps) {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity>
-          <Bookmark size={22} color={COLORS.white} />
+        <TouchableOpacity onPress={handleBookmark}>
+          <Bookmark
+            size={22}
+            color={isBookmarked ? COLORS.primary : COLORS.white}
+            fill={isBookmarked ? COLORS.primary : undefined}
+          />
         </TouchableOpacity>
       </View>
 
