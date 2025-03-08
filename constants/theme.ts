@@ -1,11 +1,14 @@
 import { Platform } from "react-native";
 
 export const COLORS = {
-  primary: "#4ADE80", // Green (Main accent color)
-  secondary: "#2DD4BF", // Teal (Secondary accent color)
+  // primary: "#4ADE80", // Green (Main accent color)
+  // secondary: "#2DD4BF", // Teal (Secondary accent color)
+  primary: "#CC5500", // Burnt Orange (Main accent color)
+  secondary: "#FFAB40", // Warm Orange-Yellow - Bright, fiery pop
   background: "#000000", // Black (Main background color)
   surface: "#1A1A1A", // Dark Gray (Card or container background)
   surfaceLight: "#2A2A2A", // Lighter Dark Gray (Alternative surface color)
+  text: "#E8ECEF", // Off-White - Readable on dark backgrounds
   white: "#FFFFFF", // White (Text or icons on dark background)
   grey: "#9CA3AF", // Gray (Muted text or secondary elements)
 } as const;
