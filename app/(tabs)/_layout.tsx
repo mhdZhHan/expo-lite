@@ -2,9 +2,9 @@ import { Tabs } from "expo-router";
 import {
   Bell,
   Bookmark,
+  CirclePlus,
   CircleUserRound,
   House,
-  Plus,
 } from "lucide-react-native";
 
 import { COLORS } from "@/constants";
@@ -45,7 +45,7 @@ export default function TabLayout() {
         name="create"
         options={{
           tabBarIcon: ({ size, color }) => (
-            <Plus size={size} color={COLORS.primary} />
+            <CirclePlus size={size} color={COLORS.primary} />
           ),
         }}
       />
