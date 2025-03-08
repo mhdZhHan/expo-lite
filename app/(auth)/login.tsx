@@ -5,7 +5,7 @@ import { Sprout } from "lucide-react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { COLORS, SIZES } from "@/constants";
-import { styles } from "./login.styles";
+import { styles } from "@/styles/login.styles";
 
 export default function Login() {
   const router = useRouter();
