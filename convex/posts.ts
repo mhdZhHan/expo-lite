@@ -80,3 +80,48 @@ export const getFeedPosts = query({
     return postsWithInfo;
   },
 });
+
+export const toggleLike = mutation({
+  args: { postId: v.id("posts") },
+  handler: async (ctx, args) => {
+    const currentUser = await getAuthenticatedUser(ctx);
+
+    const isLiked = await ctx.db
+      .query("likes")
+      .withIndex("by_user_and_post", (q) =>
+        q.eq("userId", currentUser._id).eq("postId", args.postId),
+      )
+      .first();
+
+    const post = await ctx.db.get(args.postId);
+    if (!post) throw new Error("Post not found");
+
+    // like/unlike
+    if (isLiked) {
+      // unlike (remove like from the db and decrement likes count from post table)
+      await ctx.db.delete(isLiked._id);
+      await ctx.db.patch(args.postId, { likes: post.likes - 1 });
+
+      return false; // un liked
+    } else {
+      // unlike (insert new like and increment)
+      await ctx.db.insert("likes", {
+        postId: post._id,
+        userId: currentUser._id,
+      });
+      await ctx.db.patch(args.postId, { likes: post.likes + 1 });
+
+      // if it's not current user post send a notification
+      if (currentUser._id !== post.userId) {
+        await ctx.db.insert("notifications", {
+          receiverId: post.userId,
+          senderId: currentUser._id,
+          type: "like",
+          postId: post._id,
+        });
+      }
+
+      return true; // liked
+    }
+  },
+});

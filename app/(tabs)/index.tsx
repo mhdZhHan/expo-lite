@@ -45,7 +45,7 @@ export default function Index() {
           style={styles.storiesContainer}
         >
           {STORIES.map((story) => (
-            <UserStoryCircle story={story} />
+            <UserStoryCircle key={story.id} story={story} />
           ))}
         </ScrollView>
 
