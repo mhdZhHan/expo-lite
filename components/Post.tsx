@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Bookmark, Heart, MessageCircle, Trash } from "lucide-react-native";
+import {
+  Bookmark,
+  Heart,
+  MessageCircle,
+  Trash,
+  Ellipsis,
+} from "lucide-react-native";
 import { Link } from "expo-router";
 import { Image } from "expo-image";
-import { useMutation } from "convex/react";
+import { useUser } from "@clerk/clerk-expo";
+import { useMutation, useQuery } from "convex/react";
+
 import { api } from "../convex/_generated/api";
 import { type Id } from "../convex/_generated/dataModel";
 
@@ -30,16 +38,20 @@ type PostProps = {
 };
 
 export default function Post({ post }: PostProps) {
-  const [isLiked, setIsLiked] = useState(post.isLiked);
-  const [likesCount, setLikesCount] = useState(post.likes);
-
   const [showComments, setShowComments] = useState(false);
   const [commentsCount, setCommentsCount] = useState(post.comments);
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const { user } = useUser(); // user from clerk
+  const currentUser = useQuery(
+    api.users.getUserByClerkId,
+    user ? { clerkId: user.id } : "skip",
+  ); // user details from convex db
+
+  // ------------------------------------------------------
+  const [isLiked, setIsLiked] = useState(post.isLiked);
+  const [likesCount, setLikesCount] = useState(post.likes);
 
   const toggleLike = useMutation(api.posts.toggleLike);
-  const toggleBookmark = useMutation(api.bookmarks.toggleBookmark);
 
   const handleLike = () => {
     const wasLiked = isLiked;
@@ -54,6 +66,11 @@ export default function Post({ post }: PostProps) {
       setLikesCount((prev) => (wasLiked ? prev + 1 : prev - 1));
     });
   };
+  // ------------------------------------------------------
+
+  // ------------------------------------------------------
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const toggleBookmark = useMutation(api.bookmarks.toggleBookmark);
 
   const handleBookmark = () => {
     const wasBookmarked = isBookmarked;
@@ -64,6 +81,14 @@ export default function Post({ post }: PostProps) {
     toggleBookmark({ postId: post._id }).catch((error) => {
       console.error("Error bookmarking post", error);
       setIsBookmarked(wasBookmarked);
+    });
+  };
+  // ------------------------------------------------------
+
+  const deletePost = useMutation(api.posts.deletePost);
+  const handlePostDelete = async () => {
+    deletePost({ postId: post._id }).catch((error) => {
+      console.error("Error bookmarking post", error);
     });
   };
 
@@ -84,13 +109,15 @@ export default function Post({ post }: PostProps) {
           </TouchableOpacity>
         </Link>
 
-        <TouchableOpacity>
-          <Trash size={20} color={COLORS.primary} />
-        </TouchableOpacity>
-        {/* 
-        <TouchableOpacity>
-          <Ellipsis size={20} color={COLORS.white} />
-        </TouchableOpacity> */}
+        {post?.author?._id === currentUser?._id ? (
+          <TouchableOpacity onPress={handlePostDelete}>
+            <Trash size={20} color={COLORS.primary} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity>
+            <Ellipsis size={20} color={COLORS.white} />
+          </TouchableOpacity>
+        )}
       </View>
 
       <Image

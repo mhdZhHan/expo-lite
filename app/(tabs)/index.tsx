@@ -22,8 +22,6 @@ export default function Index() {
 
   if (posts === undefined) return <Loader />;
 
-  if (posts.length === 0) return <NoPostsFound />;
-
   return (
     <View style={styles.container}>
       {/* HEADER */}
@@ -61,6 +59,7 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 60 }}
         ListHeaderComponent={StoriesSection}
+        ListEmptyComponent={<NoPostsFound />}
       />
     </View>
   );
