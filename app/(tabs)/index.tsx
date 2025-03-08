@@ -1,4 +1,10 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { LogOut } from "lucide-react-native";
 import { useAuth } from "@clerk/clerk-expo";
 import { useQuery } from "convex/react";
@@ -35,7 +41,7 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView
+      {/* <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 60 }}
       >
@@ -52,7 +58,29 @@ export default function Index() {
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
-      </ScrollView>
+      </ScrollView> */}
+
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => <Post post={item} />}
+        keyExtractor={(item) => item._id.toString()}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 60 }}
+        ListHeaderComponent={StoriesSection}
+      />
     </View>
   );
 }
+
+const StoriesSection = () => {
+  return (
+    <FlatList
+      data={STORIES}
+      style={styles.storiesContainer}
+      renderItem={({ item }) => <UserStoryCircle story={item} />}
+      keyExtractor={(item) => item.id.toString()}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+    />
+  );
+};
