@@ -1,10 +1,4 @@
-import {
-  FlatList,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { LogOut } from "lucide-react-native";
 import { useAuth } from "@clerk/clerk-expo";
 import { useQuery } from "convex/react";
