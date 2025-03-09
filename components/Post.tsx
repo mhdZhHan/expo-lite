@@ -29,6 +29,7 @@ type PostProps = {
     comments: number;
     _creationTime: number;
     isLiked: boolean;
+    isBookmarked: boolean;
     author: {
       _id: string;
       username: string;
@@ -69,7 +70,7 @@ export default function Post({ post }: PostProps) {
   // ------------------------------------------------------
 
   // ------------------------------------------------------
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(post.isBookmarked);
   const toggleBookmark = useMutation(api.bookmarks.toggleBookmark);
 
   const handleBookmark = () => {

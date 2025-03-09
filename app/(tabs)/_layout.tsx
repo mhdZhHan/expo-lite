@@ -45,7 +45,7 @@ export default function TabLayout() {
         name="create"
         options={{
           tabBarIcon: ({ size, color }) => (
-            <CirclePlus size={size} color={COLORS.primary} />
+            <CirclePlus size={size} color={color} />
           ),
         }}
       />

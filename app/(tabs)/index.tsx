@@ -12,7 +12,7 @@ import { STORIES } from "@/constants/mock-data";
 // components
 import UserStoryCircle from "@/components/UserStoryCircle";
 import Loader from "@/components/Loader";
-import NoPostsFound from "@/components/NoPostsFound";
+import NotFound from "@/components/NotFound";
 import Post from "@/components/Post";
 
 export default function Index() {
@@ -59,7 +59,7 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 60 }}
         ListHeaderComponent={StoriesSection}
-        ListEmptyComponent={<NoPostsFound />}
+        ListEmptyComponent={<NotFound text="No posts yet" />}
       />
     </View>
   );

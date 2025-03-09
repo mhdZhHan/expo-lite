@@ -1,7 +1,13 @@
 import { View, Text } from "react-native";
 import { COLORS, SIZES } from "../constants";
 
-export default function NoPostsFound() {
+type NotFoundProps = {
+  text: string;
+};
+
+export default function NotFound(props: NotFoundProps) {
+  const { text } = props;
+
   return (
     <View
       style={{
@@ -17,7 +23,7 @@ export default function NoPostsFound() {
           color: COLORS.primary,
         }}
       >
-        No posts yet
+        {text}
       </Text>
     </View>
   );
