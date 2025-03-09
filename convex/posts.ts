@@ -192,3 +192,22 @@ export const deletePost = mutation({
     });
   },
 });
+
+export const getPostsByUser = query({
+  args: { userId: v.optional(v.id("users")) },
+  handler: async (ctx, args) => {
+    const user = args.userId
+      ? await ctx.db.get(args.userId)
+      : await getAuthenticatedUser(ctx);
+
+    if (!user) throw new ConvexError("User not found");
+
+    // get user posts
+    const posts = await ctx.db
+      .query("posts")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .collect();
+
+    return posts;
+  },
+});
