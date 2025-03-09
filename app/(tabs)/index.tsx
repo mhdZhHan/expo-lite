@@ -60,6 +60,14 @@ export default function Index() {
         contentContainerStyle={{ paddingBottom: 60 }}
         ListHeaderComponent={StoriesSection}
         ListEmptyComponent={<NotFound text="No posts yet" />}
+        // refreshControl={
+        //   <RefreshControl
+        //     refreshing={refreshing}
+        //     onRefresh={onRefresh}
+        //     tintColor={COLORS.primary} // Makes the spinner match your app's theme
+        //     colors={[COLORS.primary]} // Android
+        //   />
+        // }
       />
     </View>
   );
