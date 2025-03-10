@@ -46,7 +46,7 @@ export default function NotificationItem(props: NotificationItemProps) {
         </Link>
 
         <View style={styles.notificationInfo}>
-          <Link href={`/(tabs)`} asChild>
+          <Link href={`/user/${sender._id}`} asChild>
             <TouchableOpacity>
               <Text style={styles.username}>{sender.username}</Text>
             </TouchableOpacity>
