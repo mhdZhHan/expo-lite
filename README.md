@@ -32,15 +32,15 @@ This app is powered by some awesome tools:
 Check out the app in action! 😎
 
 - **New Post**: Tap to share your vibe! 📤  
-  ![New Post](screenshots/new-post.png)
+  ![New Post](/screenshots/new-post.jpg)
 - **Notifications**: See who’s liking and commenting! 🔔  
-  ![Notifications](screenshots/notifications.png)
+  ![Notifications](/screenshots/notifications.jpg)
 - **Bookmarks**: Your saved treasures! 🔖  
-  ![Bookmarks](screenshots/bookmarks.png)
+  ![Bookmarks](/screenshots/bookmarks.jpg)
 - **Profile**: Show off your style! 🖼️  
-  ![Profile](screenshots/profile.png)
+  ![Profile](/screenshots/profile.jpg)
 - **Feed**: Explore the cosmic glow! 🌕  
-  ![Feed](screenshots/feed.png)
+  ![Feed](/screenshots/feed.jpg)
 
 ## 🎮 How to Run It
 
