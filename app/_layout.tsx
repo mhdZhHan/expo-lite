@@ -1,8 +1,9 @@
-import { useCallback } from "react";
-import { StatusBar } from "react-native";
+import { useCallback, useEffect } from "react";
+import { Platform, StatusBar } from "react-native";
 import { SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import * as NavigationBar from "expo-navigation-bar";
 
 import Providers from "@/components/Providers";
 import AuthNavigation from "@/components/AuthNavigation";
@@ -22,6 +23,14 @@ const RootLayout = () => {
   const onLayoutRootView = useCallback(async () => {
     if (fontLoaded) await SplashScreen.hideAsync();
   }, [fontLoaded]);
+
+  // NOTE: Fix Android navigation bar style to match the app's dark theme
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      NavigationBar.setBackgroundColorAsync(COLORS.background);
+      NavigationBar.setButtonStyleAsync("light");
+    }
+  }, []);
 
   return (
     <Providers>
