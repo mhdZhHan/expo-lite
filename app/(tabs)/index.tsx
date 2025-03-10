@@ -1,4 +1,10 @@
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  RefreshControl,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { LogOut } from "lucide-react-native";
 import { useAuth } from "@clerk/clerk-expo";
 import { useQuery } from "convex/react";
@@ -14,13 +20,23 @@ import UserStoryCircle from "@/components/UserStoryCircle";
 import Loader from "@/components/Loader";
 import NotFound from "@/components/NotFound";
 import Post from "@/components/Post";
+import { useState } from "react";
 
 export default function Index() {
   const { signOut } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
 
   const posts = useQuery(api.posts.getFeedPosts);
 
   if (posts === undefined) return <Loader />;
+
+  // NOTE: this does nothing just for fun, Convex is a supercharged backend! 🚀
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
 
   return (
     <View style={styles.container}>
@@ -60,14 +76,14 @@ export default function Index() {
         contentContainerStyle={{ paddingBottom: 60 }}
         ListHeaderComponent={StoriesSection}
         ListEmptyComponent={<NotFound text="No posts yet" />}
-        // refreshControl={
-        //   <RefreshControl
-        //     refreshing={refreshing}
-        //     onRefresh={onRefresh}
-        //     tintColor={COLORS.primary} // Makes the spinner match your app's theme
-        //     colors={[COLORS.primary]} // Android
-        //   />
-        // }
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={COLORS.primary} // Makes the spinner match your app's theme
+            colors={[COLORS.primary]} // Android
+          />
+        }
       />
     </View>
   );
