@@ -25,7 +25,7 @@ export default function NotificationItem(props: NotificationItemProps) {
   return (
     <View style={styles.notificationItem}>
       <View style={styles.notificationContent}>
-        <Link href={`/(tabs)/profile`} asChild>
+        <Link href={`/user/${sender._id}`} asChild>
           <TouchableOpacity style={styles.avatarContainer}>
             <Image
               source={{ uri: sender.image }}

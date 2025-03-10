@@ -5,7 +5,7 @@ import type { Doc } from "@/convex/_generated/dataModel";
 
 type PostsGridProps = {
   posts: Doc<"posts">[];
-  onPostPress: (post: Doc<"posts">) => void;
+  onPostPress?: (post: Doc<"posts">) => void;
 };
 
 export default function PostsGrid({ posts, onPostPress }: PostsGridProps) {
@@ -17,7 +17,7 @@ export default function PostsGrid({ posts, onPostPress }: PostsGridProps) {
       renderItem={({ item }) => (
         <TouchableOpacity
           style={styles.gridItem}
-          onPress={() => onPostPress(item)}
+          onPress={onPostPress ? () => onPostPress(item) : () => {}}
         >
           <Image
             source={item.imageUrl}
