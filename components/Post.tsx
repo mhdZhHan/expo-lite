@@ -40,7 +40,6 @@ type PostProps = {
 
 export default function Post({ post }: PostProps) {
   const [showComments, setShowComments] = useState(false);
-  const [commentsCount, setCommentsCount] = useState(post.comments);
 
   const { user } = useUser(); // user from clerk
   const currentUser = useQuery(
@@ -50,7 +49,6 @@ export default function Post({ post }: PostProps) {
 
   // ------------------------------------------------------
   const [isLiked, setIsLiked] = useState(post.isLiked);
-  const [likesCount, setLikesCount] = useState(post.likes);
 
   const toggleLike = useMutation(api.posts.toggleLike);
 
@@ -58,13 +56,11 @@ export default function Post({ post }: PostProps) {
     const wasLiked = isLiked;
     // Optimistically update UI
     setIsLiked(!wasLiked);
-    setLikesCount((prev) => (wasLiked ? prev - 1 : prev + 1));
 
     // API call in background
     toggleLike({ postId: post._id }).catch((error) => {
       console.error("Error liking post", error);
       setIsLiked(wasLiked);
-      setLikesCount((prev) => (wasLiked ? prev + 1 : prev - 1));
     });
   };
   // ------------------------------------------------------
@@ -164,8 +160,8 @@ export default function Post({ post }: PostProps) {
       {/* POST INFO */}
       <View style={styles.postInfo}>
         <Text style={styles.likesText}>
-          {likesCount > 0
-            ? `${likesCount.toLocaleString()} likes`
+          {post.likes > 0
+            ? `${post.likes.toLocaleString()} likes`
             : `Be the first to like`}
         </Text>
 
@@ -176,11 +172,11 @@ export default function Post({ post }: PostProps) {
           </View>
         )}
 
-        {commentsCount > 0 && (
+        {post.comments > 0 && (
           <TouchableOpacity onPress={() => setShowComments(true)}>
             <Text
               style={styles.commentsText}
-            >{`View all ${commentsCount} comments`}</Text>
+            >{`View all ${post.comments} comments`}</Text>
           </TouchableOpacity>
         )}
 
@@ -193,9 +189,9 @@ export default function Post({ post }: PostProps) {
         postId={post._id}
         visible={showComments}
         onClose={() => setShowComments(false)}
-        onCommentAdded={() => {
-          setCommentsCount((prev) => prev + 1);
-        }}
+        // onCommentAdded={() => {
+        //   setCommentsCount((prev) => prev + 1);
+        // }}
       />
     </View>
   );

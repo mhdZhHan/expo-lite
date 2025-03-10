@@ -26,7 +26,7 @@ type CommentsModelProps = {
   postId: Id<"posts">;
   visible: boolean;
   onClose: () => void;
-  onCommentAdded: () => void;
+  onCommentAdded?: () => void;
 };
 
 export default function CommentsModel({
@@ -50,7 +50,9 @@ export default function CommentsModel({
       });
 
       setNewComment("");
-      onCommentAdded();
+      {
+        onCommentAdded && onCommentAdded();
+      }
     } catch (error) {
       console.error("Error adding comment:", error);
     }
