@@ -30,6 +30,7 @@ This app is powered by some awesome tools:
 ## 📸 Screenshots
 
 Check out the app in action! 😎
+
 ![New Post](/screenshots/frame.png)
 
 <!-- - **New Post**: Tap to share your vibe! 📤
