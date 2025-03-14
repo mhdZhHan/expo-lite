@@ -30,17 +30,18 @@ This app is powered by some awesome tools:
 ## 📸 Screenshots
 
 Check out the app in action! 😎
+![New Post](/screenshots/frame.png)
 
-- **New Post**: Tap to share your vibe! 📤  
+<!-- - **New Post**: Tap to share your vibe! 📤
   ![New Post](/screenshots/new-post.jpg)
-- **Notifications**: See who’s liking and commenting! 🔔  
+- **Notifications**: See who’s liking and commenting! 🔔
   ![Notifications](/screenshots/notifications.jpg)
-- **Bookmarks**: Your saved treasures! 🔖  
+- **Bookmarks**: Your saved treasures! 🔖
   ![Bookmarks](/screenshots/bookmarks.jpg)
-- **Profile**: Show off your style! 🖼️  
+- **Profile**: Show off your style! 🖼️
   ![Profile](/screenshots/profile.jpg)
-- **Feed**: Explore the cosmic glow! 🌕  
-  ![Feed](/screenshots/feed.jpg)
+- **Feed**: Explore the cosmic glow! 🌕
+  ![Feed](/screenshots/feed.jpg) -->
 
 ## 🎮 How to Run It
 
@@ -110,4 +111,4 @@ Love the app? Want to help? 🎉
 
 ## 🙌 Thanks
 
-Big thanks to the [Expo](https://expo.dev), [Convex](https://convex.dev), and [Clerk  ](https://clerk.com/) teams for their amazing tools! 🙏 Also, a shoutout to you for checking this out—hope you enjoy **expo-social-lite** as much as I enjoyed building it! 😄
+Big thanks to the [Expo](https://expo.dev), [Convex](https://convex.dev), and [Clerk ](https://clerk.com/) teams for their amazing tools! 🙏 Also, a shoutout to you for checking this out—hope you enjoy **expo-social-lite** as much as I enjoyed building it! 😄
